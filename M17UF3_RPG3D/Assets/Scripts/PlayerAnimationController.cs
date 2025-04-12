@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
-    private const string WalkParam = "isWalk", RunParam = "isRun", JumpParam = "Jump";
-
     public static PlayerAnimationController Instance;
 
     private List<string> _allParams;
@@ -15,7 +13,12 @@ public class PlayerAnimationController : MonoBehaviour
     {
         Instance = this;
         _animator = GetComponent<Animator>();
-        _allParams = new List<string> { WalkParam, RunParam, JumpParam };
+        _allParams = new List<string>
+        {
+            ConstantValue.WalkParam,
+            ConstantValue.RunParam,
+            ConstantValue.JumpParam
+        };
     }
 
     private void DisableAnimation()
@@ -29,20 +32,18 @@ public class PlayerAnimationController : MonoBehaviour
     public void SetRun(bool value)
     {
         DisableAnimation();
-        _animator.SetBool(RunParam, value);
+        _animator.SetBool(ConstantValue.RunParam, value);
     }
 
     public void SetWalk(bool value)
     {
         DisableAnimation();
-        _animator.SetBool(WalkParam, value);
+        _animator.SetBool(ConstantValue.WalkParam, value);
     }
 
     public void ActiveJump()
     {
         DisableAnimation();
-        _animator.SetTrigger(JumpParam);
+        _animator.SetTrigger(ConstantValue.JumpParam);
     }
-
-
 }

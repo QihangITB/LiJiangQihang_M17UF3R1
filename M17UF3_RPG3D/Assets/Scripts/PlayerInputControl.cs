@@ -9,25 +9,13 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     private Vector2 _movementP;
     private Rigidbody _rb;
 
-    public Transform player;  // Referencia al jugador
-    public float distanceFromPlayer = 5f;  // Distancia entre la cámara y el jugador
-    private float mouseX = 0f;
-    private float mouseY = 0f;
-
-    private float _rotationX = 0f;
-
-    public Transform Camera;
     public float MovementSpeed = 5f;
-    public float CameraSpeed = 300f;
 
     private void Awake()
     {
         _ic = new InputControl();
         _ic.Player.SetCallbacks(this);
         _rb = GetComponent<Rigidbody>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void OnEnable()
@@ -45,40 +33,9 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
         MovePlayer();
     }
 
-    private void Update()
-    {
-        MoveCameraWithMouse();
-    }
-
     private void MovePlayer()
     {
-        Vector3 forward = Camera.forward;
-        Vector3 right = Camera.right;
-
-        forward.y = 0f;
-        right.y = 0f;
-
-        forward.Normalize();
-        right.Normalize();
-
-        Vector3 movement = (forward * _movementP.y + right * _movementP.x).normalized;
-
-        _rb.velocity = new Vector3(movement.x * MovementSpeed, _rb.velocity.y, movement.z * MovementSpeed);
-    }
-
-    private void MoveCameraWithMouse()
-    {
-        mouseX += Input.GetAxis("Mouse X") * CameraSpeed * Time.deltaTime;
-        mouseY -= Input.GetAxis("Mouse Y") * CameraSpeed * Time.deltaTime;
-
-        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
-
-        Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0f);
-
-        Vector3 targetPosition = new Vector3(0f, 2f, -distanceFromPlayer);
-        Camera.transform.position = player.position + rotation * targetPosition;
-
-        Camera.transform.LookAt(player);
+        _rb.velocity = new Vector3(_movementP.x * MovementSpeed, _rb.velocity.y, _movementP.y * MovementSpeed);
     }
 
     void InputControl.IPlayerActions.OnWalk(InputAction.CallbackContext context)
@@ -114,4 +71,28 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
             PlayerAnimationController.Instance.ActiveJump();
         }
     }
+
+    public void OnChangeCamera(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            string activeCamera = CameraController.Instance.GetActiveCameraName();
+
+            activeCamera = activeCamera == ConstantValue.ThirdPerson ? ConstantValue.FirstPerson : ConstantValue.ThirdPerson;
+
+            CameraController.Instance.SetCameraByName(activeCamera);
+        }
+    }
+
+    public void OnDance(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            CameraController.Instance.SetTemporalCameraByName(ConstantValue.FrontPerson, 3f);
+        }
+    }
+
+
+
+
 }
