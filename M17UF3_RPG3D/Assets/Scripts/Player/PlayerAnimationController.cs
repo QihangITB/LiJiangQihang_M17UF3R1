@@ -6,7 +6,6 @@ public class PlayerAnimationController : MonoBehaviour
 {
     public static PlayerAnimationController Instance;
 
-    private List<string> _allParams;
     private Animator _animator;
 
     private void Awake()
@@ -22,37 +21,70 @@ public class PlayerAnimationController : MonoBehaviour
         }
 
         _animator = GetComponent<Animator>();
-        _allParams = new List<string>
-        {
-            ConstantValue.WalkParam,
-            ConstantValue.RunParam,
-            ConstantValue.JumpParam
-        };
     }
 
-    private void DisableAnimation()
+    // Agacharse
+    public void ActiveCrouch()
     {
-        foreach (string param in _allParams)
-        {
-            _animator.SetBool(param, false);
-        }
+        _animator.SetBool(ConstantValue.CrouchParam, true);
     }
 
-    public void SetRun(bool value)
+    public void DeactiveCrouch()
     {
-        DisableAnimation();
-        _animator.SetBool(ConstantValue.RunParam, value);
+        _animator.SetBool(ConstantValue.CrouchParam, false);
     }
 
-    public void SetWalk(bool value)
+    // Apuntar
+    public void ActiveAim()
     {
-        DisableAnimation();
-        _animator.SetBool(ConstantValue.WalkParam, value);
+        _animator.SetBool(ConstantValue.AimParam, true);
     }
 
+    public void DeactiveAim()
+    {
+        _animator.SetBool(ConstantValue.AimParam, false);
+    }
+
+    // Saltar
     public void ActiveJump()
     {
-        DisableAnimation();
-        _animator.SetTrigger(ConstantValue.JumpParam);
+        _animator.SetTrigger(ConstantValue.JumpTrigger);
+    }
+
+    // Morir
+    public void ActiveDie()
+    {
+        _animator.SetTrigger(ConstantValue.DieTrigger);
+    }
+
+    // Bailar
+    public void ActiveDance()
+    {
+        _animator.SetTrigger(ConstantValue.DanceTrigger);
+
+        float danceTime = _animator.GetCurrentAnimatorStateInfo(0).length;
+        CameraController.Instance.SetTemporalCameraByName(ConstantValue.FrontPerson, danceTime - ConstantValue.Offset);
+    }
+
+    // Atacar
+    public void ActiveAttack()
+    {
+        _animator.SetTrigger(ConstantValue.AttackTrigger);
+    }
+
+    // Movimiento
+    public void SetIdle()
+    {
+        _animator.SetFloat(ConstantValue.SpeedParam, 0.0f);
+    }
+
+    public void SetWalk()
+    {
+        _animator.SetFloat(ConstantValue.SpeedParam, 0.5f);
+    }
+
+    public void SetRun()
+    {
+        _animator.SetFloat(ConstantValue.SpeedParam, 1f);
     }
 }

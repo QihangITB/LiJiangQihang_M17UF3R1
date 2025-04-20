@@ -7,6 +7,9 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 {
     private InputControl _ic;
     private Vector2 _movementP;
+    private bool isMoving = false;
+    private bool isRunning = false;
+    private bool isCrouching = false;
 
     public Vector2 MovementP { get { return _movementP; } }
 
@@ -26,29 +29,90 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
         _ic.Player.Disable();
     }
 
-    void InputControl.IPlayerActions.OnWalk(InputAction.CallbackContext context)
+    private void FixedUpdate()
+    {
+        if(isMoving)
+        {
+            PlayerAnimationController.Instance.SetWalk();
+        }
+
+        if (isRunning)
+        {
+            PlayerAnimationController.Instance.SetRun();
+        }
+    }
+
+    void InputControl.IPlayerActions.OnMove(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             _movementP = context.ReadValue<Vector2>();
-            PlayerAnimationController.Instance.SetWalk(true);
+            isMoving = true;
         }
         else if (context.canceled)
         {
             _movementP = Vector2.zero;
-            PlayerAnimationController.Instance.SetWalk(false);
+            PlayerAnimationController.Instance.SetIdle();
+            isMoving = false;
         }
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _movementP != Vector2.zero)
         {
-            PlayerAnimationController.Instance.SetRun(true);
+            isRunning = true;
         }
         else if (context.canceled)
         {
-            PlayerAnimationController.Instance.SetRun(false);
+            if(isMoving)
+            {
+                PlayerAnimationController.Instance.SetWalk();
+            }
+            else
+            {
+                PlayerAnimationController.Instance.SetIdle();
+            }
+            isRunning = false;
+            Debug.Log("Running canceled");
+        }
+    }
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            string activeCamera = CameraController.Instance.GetActiveCameraName();
+
+            if (activeCamera == ConstantValue.ThirdPerson)
+            {
+                activeCamera = ConstantValue.FirstPerson;
+                PlayerAnimationController.Instance.ActiveAim();
+            }
+            else
+            {
+                activeCamera = ConstantValue.ThirdPerson;
+                PlayerAnimationController.Instance.DeactiveAim();
+            }
+
+            CameraController.Instance.SetCameraByName(activeCamera);
+        }
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(isCrouching)
+            {
+                PlayerAnimationController.Instance.DeactiveCrouch();
+                isCrouching = false;
+            }
+            else
+            {
+                PlayerAnimationController.Instance.ActiveCrouch();
+                isCrouching = true;
+            }
         }
     }
 
@@ -60,23 +124,11 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
         }
     }
 
-    public void OnChangeCamera(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            string activeCamera = CameraController.Instance.GetActiveCameraName();
-
-            activeCamera = activeCamera == ConstantValue.ThirdPerson ? ConstantValue.FirstPerson : ConstantValue.ThirdPerson;
-
-            CameraController.Instance.SetCameraByName(activeCamera);
-        }
-    }
-
     public void OnDance(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            CameraController.Instance.SetTemporalCameraByName(ConstantValue.FrontPerson, 3f);
+            PlayerAnimationController.Instance.ActiveDance();
         }
     }
 }
