@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Camera '{name}' not found.");
+            Debug.LogWarning($"Camara '{name}' no encontrada");
         }
     }
 
@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Camera '{name}' not found.");
+            Debug.LogWarning($"Camara '{name}' no encontrada");
         }
     }
 
@@ -88,6 +88,33 @@ public class CameraController : MonoBehaviour
             }
         }
 
-        return null; // No active camera found
+        return null; 
+    }
+
+    public Vector3 GetCameraDirection(Transform destination)
+    {
+        Vector3 direction = Vector3.zero;
+
+        switch(GetActiveCameraName())
+        {
+            case ConstantValue.ThirdPerson:
+                direction = destination.position - transform.position;
+                direction.y = destination.position.y; // Ignore vertical difference
+                break;
+
+            case ConstantValue.FirstPerson:
+                direction = transform.forward;
+                break;
+
+            case ConstantValue.FrontPerson:
+                direction = Vector3.zero;
+                break;
+
+            default:
+                Debug.LogWarning("Camara no encontrada");
+                break;
+        }
+
+        return direction.normalized;
     }
 }

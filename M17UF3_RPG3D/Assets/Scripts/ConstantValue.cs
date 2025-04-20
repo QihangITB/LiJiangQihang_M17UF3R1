@@ -4,9 +4,13 @@ public static class ConstantValue
     public const string PlayerTag = "Player";
 
     // ANIMATION
-    public const string WalkParam = "isWalk";
-    public const string RunParam = "isRun";
-    public const string JumpParam = "Jump";
+    public const string CrouchParam = "IsCrouching";
+    public const string AimParam = "IsAiming";
+    public const string JumpTrigger = "Jump";
+    public const string DieTrigger = "Die";
+    public const string DanceTrigger = "Dance";
+    public const string AttackTrigger = "Attack";
+    public const string SpeedParam = "Speed";
 
     // CAMERA
     public const string ThirdPerson = "ThirdPersonCamera";

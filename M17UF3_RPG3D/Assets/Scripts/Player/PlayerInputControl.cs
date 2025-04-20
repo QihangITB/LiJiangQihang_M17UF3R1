@@ -7,15 +7,13 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 {
     private InputControl _ic;
     private Vector2 _movementP;
-    private Rigidbody _rb;
 
-    public float MovementSpeed = 5f;
+    public Vector2 MovementP { get { return _movementP; } }
 
     private void Awake()
     {
         _ic = new InputControl();
         _ic.Player.SetCallbacks(this);
-        _rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -26,16 +24,6 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     private void OnDisable()
     {
         _ic.Player.Disable();
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-
-    private void MovePlayer()
-    {
-        _rb.velocity = new Vector3(_movementP.x * MovementSpeed, _rb.velocity.y, _movementP.y * MovementSpeed);
     }
 
     void InputControl.IPlayerActions.OnWalk(InputAction.CallbackContext context)
@@ -91,8 +79,4 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
             CameraController.Instance.SetTemporalCameraByName(ConstantValue.FrontPerson, 3f);
         }
     }
-
-
-
-
 }
