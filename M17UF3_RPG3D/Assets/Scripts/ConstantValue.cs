@@ -4,6 +4,7 @@ public static class ConstantValue
     public const float Offset = 1f;
 
     public const string PlayerTag = "Player";
+    public const string ItemTag = "Item";
 
     // ANIMATION
     public const string CrouchParam = "IsCrouching";
