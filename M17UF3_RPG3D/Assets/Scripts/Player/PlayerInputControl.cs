@@ -131,4 +131,13 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
             PlayerAnimationController.Instance.ActiveDance();
         }
     }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            string inputValue = context.control.displayName;
+
+        }
+    }
 }

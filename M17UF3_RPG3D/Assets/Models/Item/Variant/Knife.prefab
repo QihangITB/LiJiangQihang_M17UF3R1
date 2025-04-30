@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2e5e4c431a43d054ab7d0691bea988f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6276531
+      value: 1.571
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2e5e4c431a43d054ab7d0691bea988f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2e5e4c431a43d054ab7d0691bea988f1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.937331
+      value: -5.633
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2e5e4c431a43d054ab7d0691bea988f1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,7 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2e5e4c431a43d054ab7d0691bea988f1, type: 3}
       propertyPath: m_Name
-      value: Bayonet
+      value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2e5e4c431a43d054ab7d0691bea988f1, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
