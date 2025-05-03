@@ -7,9 +7,9 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 {
     private InputControl _ic;
     private Vector2 _movementP;
-    private bool isMoving = false;
-    private bool isRunning = false;
-    private bool isCrouching = false;
+    private bool _isMoving = false;
+    private bool _isRunning = false;
+    private bool _isCrouching = false;
 
     public Vector2 MovementP { get { return _movementP; } }
 
@@ -31,12 +31,12 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 
     private void FixedUpdate()
     {
-        if(isMoving)
+        if(_isMoving)
         {
             PlayerAnimationController.Instance.SetWalk();
         }
 
-        if (isRunning)
+        if (_isRunning)
         {
             PlayerAnimationController.Instance.SetRun();
         }
@@ -47,13 +47,13 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
         if (context.performed)
         {
             _movementP = context.ReadValue<Vector2>();
-            isMoving = true;
+            _isMoving = true;
         }
         else if (context.canceled)
         {
             _movementP = Vector2.zero;
             PlayerAnimationController.Instance.SetIdle();
-            isMoving = false;
+            _isMoving = false;
         }
     }
 
@@ -61,11 +61,11 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         if (context.performed && _movementP != Vector2.zero)
         {
-            isRunning = true;
+            _isRunning = true;
         }
         else if (context.canceled)
         {
-            if(isMoving)
+            if(_isMoving)
             {
                 PlayerAnimationController.Instance.SetWalk();
             }
@@ -73,8 +73,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
             {
                 PlayerAnimationController.Instance.SetIdle();
             }
-            isRunning = false;
-            Debug.Log("Running canceled");
+            _isRunning = false;
         }
     }
 
@@ -103,15 +102,15 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         if (context.performed)
         {
-            if(isCrouching)
+            if(_isCrouching)
             {
                 PlayerAnimationController.Instance.DeactiveCrouch();
-                isCrouching = false;
+                _isCrouching = false;
             }
             else
             {
                 PlayerAnimationController.Instance.ActiveCrouch();
-                isCrouching = true;
+                _isCrouching = true;
             }
         }
     }
@@ -138,6 +137,44 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
         {
             string inputValue = context.control.displayName;
 
+            // Limpiamos primero el equipamiento
+            InventoryController.Instance.RemoveItemInstance();
+
+            switch (inputValue)
+            {
+                case "1":
+                    InventoryController.Instance.CreateItemInstance(ConstantValue.Knife);
+                    break;
+                case "2":
+                    InventoryController.Instance.CreateItemInstance(ConstantValue.Axe);
+                    break;
+                case "3":
+                    InventoryController.Instance.CreateItemInstance(ConstantValue.Torch);
+                    break;
+                case "4":
+                    InventoryController.Instance.CreateItemInstance(ConstantValue.Rifle);
+                    break;
+            }
+        }
+    }
+
+    public void OnMenu(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Transform hud = transform.Find(ConstantValue.HUDCanvas);
+            Transform menu = transform.Find(ConstantValue.MenuCanvas);
+
+            if (menu.gameObject.activeSelf)
+            {
+                hud.gameObject.SetActive(true);
+                menu.gameObject.SetActive(false);
+            }
+            else
+            {
+                hud.gameObject.SetActive(false);
+                menu.gameObject.SetActive(true);
+            }
         }
     }
 }
