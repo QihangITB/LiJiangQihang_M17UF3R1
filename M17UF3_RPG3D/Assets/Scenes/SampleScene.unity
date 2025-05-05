@@ -2113,6 +2113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 717510613239558384, guid: 56d01c8e1abbb8e4c83a386a3c36b414, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2132,15 +2136,19 @@ PrefabInstance:
       objectReference: {fileID: 540627073}
     - target: {fileID: 5399585610167563354, guid: af112b4779b77bc4281847e958400d25, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5399585610167563354, guid: af112b4779b77bc4281847e958400d25, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8610564674480076066, guid: af112b4779b77bc4281847e958400d25, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610564674480076066, guid: af112b4779b77bc4281847e958400d25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8950075639870336920, guid: af112b4779b77bc4281847e958400d25, type: 3}
       propertyPath: m_LocalPosition.x
