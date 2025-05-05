@@ -87,4 +87,10 @@ public class PlayerAnimationController : MonoBehaviour
     {
         _animator.SetFloat(ConstantValue.SpeedParam, 1f);
     }
+
+    // Otros
+    public float GetCurrentAnimationTime()
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).length;
+    }
 }

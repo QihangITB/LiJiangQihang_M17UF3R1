@@ -2,6 +2,7 @@ using UnityEngine.InputSystem.XInput;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Threading;
+using System.Collections;
 
 public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 {
@@ -10,6 +11,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     private bool _isMoving = false;
     private bool _isRunning = false;
     private bool _isCrouching = false;
+    private bool _isJumping = false;
 
     public Vector2 MovementP { get { return _movementP; } }
 
@@ -44,12 +46,12 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 
     void InputControl.IPlayerActions.OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !_isJumping)
         {
             _movementP = context.ReadValue<Vector2>();
             _isMoving = true;
         }
-        else if (context.canceled)
+        else if (context.canceled && !_isJumping)
         {
             _movementP = Vector2.zero;
             PlayerAnimationController.Instance.SetIdle();
@@ -81,18 +83,9 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         if (context.performed)
         {
-            string activeCamera = CameraController.Instance.GetActiveCameraName();
-
-            if (activeCamera == ConstantValue.ThirdPerson)
-            {
-                activeCamera = ConstantValue.FirstPerson;
-                PlayerAnimationController.Instance.ActiveAim();
-            }
-            else
-            {
-                activeCamera = ConstantValue.ThirdPerson;
-                PlayerAnimationController.Instance.DeactiveAim();
-            }
+            string activeCamera = CameraController.Instance.GetActiveCameraName() == ConstantValue.ThirdPerson ? 
+                                  ConstantValue.FirstPerson : 
+                                  ConstantValue.ThirdPerson;
 
             CameraController.Instance.SetCameraByName(activeCamera);
         }
@@ -119,8 +112,20 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         if (context.performed)
         {
+            _isJumping = true;
             PlayerAnimationController.Instance.ActiveJump();
+
+            StartCoroutine(FinishJumpAnimation());
         }
+    }
+
+    private IEnumerator FinishJumpAnimation()
+    {
+        float duration = PlayerAnimationController.Instance.GetCurrentAnimationTime();
+
+        yield return new WaitForSeconds(duration - ConstantValue.Offset);
+
+        _isJumping = false;
     }
 
     public void OnDance(InputAction.CallbackContext context)
@@ -169,11 +174,15 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
             {
                 hud.gameObject.SetActive(true);
                 menu.gameObject.SetActive(false);
+
+                Time.timeScale = 1f; // Volver al juego
             }
             else
             {
                 hud.gameObject.SetActive(false);
                 menu.gameObject.SetActive(true);
+
+                Time.timeScale = 0f; // Pausa el juego
             }
         }
     }

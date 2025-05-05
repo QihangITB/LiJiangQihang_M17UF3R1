@@ -118,6 +118,16 @@ public class InventoryController : MonoBehaviour
             // Ajustar la posición y rotación del item
             itemInstance.transform.localPosition = Vector3.zero;
             itemInstance.transform.localRotation = item.transform.rotation;
+
+            // El rifle tiene su propia animacion
+            if (item.name == ConstantValue.Rifle)
+            {
+                PlayerAnimationController.Instance.ActiveAim();
+            }
+            else
+            {
+                PlayerAnimationController.Instance.DeactiveAim();
+            }
         }
     }
 
@@ -128,6 +138,16 @@ public class InventoryController : MonoBehaviour
             Destroy(item.gameObject);
         }
     }
+
+    public GameObject GetItemInstance()
+    {
+        if (RightHand.childCount == 0)
+            return null;
+
+        GameObject item = RightHand.GetChild(0).gameObject;
+        return item;
+    }
+
 
     private GameObject GetPrefabByName(string name)
     {

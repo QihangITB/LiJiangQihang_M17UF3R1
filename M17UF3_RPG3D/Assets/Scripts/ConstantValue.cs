@@ -17,6 +17,8 @@ public static class ConstantValue
     public const string DanceTrigger = "Dance";
     public const string AttackTrigger = "Attack";
     public const string SpeedParam = "Speed";
+    public const string WalkParam = "IsWalking";
+    public const string ChaseParam = "IsChasing";
 
     // CAMERA
     public const string ThirdPerson = "ThirdPersonCamera";
