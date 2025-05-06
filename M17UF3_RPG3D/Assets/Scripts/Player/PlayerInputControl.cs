@@ -12,6 +12,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     private bool _isRunning = false;
     private bool _isCrouching = false;
     private bool _isJumping = false;
+    private PlayerMovement _playerMovement;
 
     public Vector2 MovementP { get { return _movementP; } }
 
@@ -19,6 +20,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         _ic = new InputControl();
         _ic.Player.SetCallbacks(this);
+        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()
@@ -64,6 +66,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
         if (context.performed && _movementP != Vector2.zero)
         {
             _isRunning = true;
+            _playerMovement.Speed = _playerMovement.RunSpeed;
         }
         else if (context.canceled)
         {
@@ -76,6 +79,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
                 PlayerAnimationController.Instance.SetIdle();
             }
             _isRunning = false;
+            _playerMovement.Speed = _playerMovement.NormalSpeed;
         }
     }
 
@@ -123,7 +127,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         float duration = PlayerAnimationController.Instance.GetCurrentAnimationTime();
 
-        yield return new WaitForSeconds(duration - ConstantValue.Offset);
+        yield return new WaitForSeconds(duration - ConstantValue.Offset - ConstantValue.Offset);
 
         _isJumping = false;
     }

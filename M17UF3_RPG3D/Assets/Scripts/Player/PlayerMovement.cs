@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private PlayerInputController _iC;
 
-    public float MovementSpeed = 5f;
+    public float Speed = 5f;
+    public float RunSpeed = 10f;
+    public float NormalSpeed = 5f;
 
     private void Awake()
     {
@@ -37,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDir = (camForward * _iC.MovementP.y + camRight * _iC.MovementP.x).normalized;
 
         // Movemos al jugador en esa dirección
-        _rb.velocity = new Vector3(moveDir.x * MovementSpeed, _rb.velocity.y, moveDir.z * MovementSpeed);
+        _rb.velocity = new Vector3(moveDir.x * Speed, _rb.velocity.y, moveDir.z * Speed);
 
         // Hacemos que el personaje mire hacia donde se mueve
         if (moveDir != Vector3.zero)
