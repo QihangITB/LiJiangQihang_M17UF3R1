@@ -158,12 +158,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594850530155915363}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000007450581, y: -1.6125526e-12, z: -5.1388872e-14, w: 1}
-  m_LocalPosition: {x: 0, y: 0.105, z: 0.016}
+  m_LocalRotation: {x: 6.117684e-10, y: 2.842171e-14, z: 1.1146608e-14, w: 1}
+  m_LocalPosition: {x: 0, y: 1.663206, z: -0.002506733}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6141786562621108766}
+  m_Father: {fileID: 238849804036825245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &671772529777381384
 GameObject:
@@ -2373,6 +2373,9 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 6314198935647129650}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 362893538009722199}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       insertIndex: -1
@@ -2383,9 +2386,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6502182839619065283, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6889955498550762808}
-    - targetCorrespondingSourceObject: {fileID: -3321919801592875672, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6314198935647129650}
     - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3904170536620425748}
@@ -2434,7 +2434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d54b7229c5527c47b77796a3b1a88f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 5
+  Speed: 5
+  RunSpeed: 10
+  NormalSpeed: 5
 --- !u!114 &5730005178855988814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2555,11 +2557,6 @@ Animator:
 --- !u!4 &2121060281929955518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
-  m_PrefabInstance: {fileID: 349637949751822198}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6141786562621108766 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
   m_PrefabInstance: {fileID: 349637949751822198}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6838237795305558709 stripped

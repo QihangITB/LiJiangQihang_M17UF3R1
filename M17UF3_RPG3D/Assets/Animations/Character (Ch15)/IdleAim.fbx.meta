@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15315b4d67a12d14daca017f1ea2f1f2
+guid: fd0cb27fb7067814b9b9f82c299f2f30
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,23 +33,23 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk_Crouch
+      name: Idle_Aim
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 63
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: -161.25
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
