@@ -34,4 +34,13 @@ public static class ConstantValue
     // UI
     public const string HUDCanvas = "HUDCanvas";
     public const string MenuCanvas = "MenuCanvas";
+
+    // SCENE
+    public const string Outside = "Game";
+    public const string Inside = "Inside";
+
+    // DOOR
+    public const string OpenDoor = "OpenDoor";
+    public const string CloseDoor = "CloseDoor";
+
 }

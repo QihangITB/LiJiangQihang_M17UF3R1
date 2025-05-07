@@ -7,6 +7,7 @@ public class ChaseState : StateSO
 {
     public override void OnStateEnter(EnemyController ec)
     {
+
     }
 
     public override void OnStateExit(EnemyController ec)

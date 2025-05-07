@@ -558,7 +558,6 @@ GameObject:
   - component: {fileID: 362893538009722199}
   - component: {fileID: 5734363370574484412}
   - component: {fileID: 5463646720309062022}
-  - component: {fileID: 9054586035555512700}
   m_Layer: 7
   m_Name: MinimapPoint
   m_TagString: Untagged
@@ -631,27 +630,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9054586035555512700
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570164652788249238}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1670441137952483295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,15 +2288,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.06
+      value: -281.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.528
+      value: 43.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.82
+      value: -44.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1a0a5b21600ef854a8aed4bf124c11da, type: 3}
       propertyPath: m_LocalRotation.w
