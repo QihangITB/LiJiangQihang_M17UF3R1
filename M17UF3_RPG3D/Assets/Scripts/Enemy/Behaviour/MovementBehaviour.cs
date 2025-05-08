@@ -7,7 +7,7 @@ public class MovementBehaviour : MonoBehaviour
 {
     const float Double = 2f;
 
-    public float Speed;
+    public float Speed = 1f;
     public List<Transform> Waypoints;
     public float MinDistanceToWaypoint;
     public float WaitTime;
@@ -27,6 +27,11 @@ public class MovementBehaviour : MonoBehaviour
     {
         _isPatrolling = false;
         _circlePoints = GetPatrolPoints(_agent.destination, 2f);
+
+        _agent.speed = Speed;
+
+        _animationController.ActiveWalk();
+        _animationController.DeactiveChase();
     }
 
     public void StopAgent()
@@ -112,5 +117,8 @@ public class MovementBehaviour : MonoBehaviour
     {
         _animationController.ActiveChase();
         _agent.SetDestination(target.position);
+
+        float chaseSpeed = Speed * Double;
+        _agent.speed = _agent.speed == chaseSpeed ? _agent.speed : chaseSpeed;
     }
 }
