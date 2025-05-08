@@ -21,13 +21,8 @@ public class InventoryController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            InitializeEmptyInventory();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        InitializeEmptyInventory();
     }
 
     private void OnTriggerEnter(Collider other)
