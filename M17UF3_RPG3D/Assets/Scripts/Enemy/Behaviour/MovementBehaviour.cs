@@ -107,6 +107,7 @@ public class MovementBehaviour : MonoBehaviour
         Vector3 direction = (transform.position - target.position).normalized;
         direction.y = 0;
 
+        _animationController.ActiveChase();
         _agent.SetDestination( transform.position + direction * 10f );
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);

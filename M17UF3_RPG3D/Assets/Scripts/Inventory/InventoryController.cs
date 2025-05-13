@@ -124,6 +124,10 @@ public class InventoryController : MonoBehaviour
                 PlayerAnimationController.Instance.DeactiveAim();
             }
         }
+        else
+        {
+            PlayerAnimationController.Instance.DeactiveAim();
+        }
     }
 
     public void RemoveItemInstance()
