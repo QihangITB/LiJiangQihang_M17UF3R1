@@ -11,7 +11,6 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     private bool _isMoving = false;
     private bool _isRunning = false;
     private bool _isCrouching = false;
-    private bool _isJumping = false;
     private PlayerMovement _playerMovement;
 
     public Vector2 MovementP { get { return _movementP; } }
@@ -48,12 +47,12 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 
     void InputControl.IPlayerActions.OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed && !_isJumping)
+        if (context.performed)
         {
             _movementP = context.ReadValue<Vector2>();
             _isMoving = true;
         }
-        else if (context.canceled && !_isJumping)
+        else if (context.canceled)
         {
             _movementP = Vector2.zero;
             PlayerAnimationController.Instance.SetIdle();
@@ -116,20 +115,10 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
     {
         if (context.performed)
         {
-            _isJumping = true;
             PlayerAnimationController.Instance.ActiveJump();
 
-            StartCoroutine(FinishJumpAnimation());
+            StartCoroutine(_playerMovement.JumpInTime(0.8f));
         }
-    }
-
-    private IEnumerator FinishJumpAnimation()
-    {
-        float duration = PlayerAnimationController.Instance.GetCurrentAnimationTime();
-
-        yield return new WaitForSeconds(duration - ConstantValue.Offset - ConstantValue.Offset);
-
-        _isJumping = false;
     }
 
     public void OnDance(InputAction.CallbackContext context)

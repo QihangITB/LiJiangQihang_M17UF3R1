@@ -62,6 +62,9 @@ public class PlayerAnimationController : MonoBehaviour
     {
         _animator.SetTrigger(ConstantValue.DanceTrigger);
 
+        DeactiveAim();
+        InventoryController.Instance.RemoveItemInstance();
+
         float danceTime = _animator.GetCurrentAnimatorStateInfo(0).length;
         CameraController.Instance.SetTemporalCameraByName(ConstantValue.FrontPerson, danceTime - ConstantValue.Offset);
     }

@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Transform cam = Camera.main.transform;
 
-        // Proyectamos los vectores de la cámara al plano XZ
         Vector3 camForward = cam.forward;
         camForward.y = 0;
         camForward.Normalize();
@@ -35,16 +34,19 @@ public class PlayerMovement : MonoBehaviour
         camRight.y = 0;
         camRight.Normalize();
 
-        // Calculamos la dirección en el mundo según el input y la cámara
         Vector3 moveDir = (camForward * _iC.MovementP.y + camRight * _iC.MovementP.x).normalized;
 
-        // Movemos al jugador en esa dirección
         _rb.velocity = new Vector3(moveDir.x * Speed, _rb.velocity.y, moveDir.z * Speed);
 
-        // Hacemos que el personaje mire hacia donde se mueve
         if (moveDir != Vector3.zero)
         {
             transform.forward = moveDir;
         }
+    }
+
+    public IEnumerator JumpInTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
     }
 }
