@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float RunSpeed = 10f;
     public float NormalSpeed = 5f;
 
+    public bool IsOnGround = false;
+
     private void Awake()
     {
         _iC = GetComponent<PlayerInputController>();
@@ -20,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+        IsOnGround = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+        Debug.DrawRay(transform.position, Vector3.down * 0.1f, Color.red);
     }
 
     private void MovePlayer()

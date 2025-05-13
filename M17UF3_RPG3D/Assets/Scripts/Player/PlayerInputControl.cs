@@ -113,7 +113,7 @@ public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && _playerMovement.IsOnGround)
         {
             PlayerAnimationController.Instance.ActiveJump();
 

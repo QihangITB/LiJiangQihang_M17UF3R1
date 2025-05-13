@@ -17,6 +17,26 @@ public class HealthController : MonoBehaviour
         _maxHealth = Health;
     }
 
+    private void Update()
+    {
+        if (gameObject.tag == ConstantValue.PlayerTag)
+        {
+            if (Health <= 0)
+            {
+                PlayerAnimationController.Instance.ActiveDie();
+                
+                StartCoroutine(ChangeCollider(1.7f));
+            }
+        }
+    }
+
+    private IEnumerator ChangeCollider(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        BoxCollider collider = GetComponent<BoxCollider>();
+        collider.size = new Vector3(0f, 0.1f, 0f);
+    }
+
     public void TakeDamage(float damage)
     {
         Health -= damage;

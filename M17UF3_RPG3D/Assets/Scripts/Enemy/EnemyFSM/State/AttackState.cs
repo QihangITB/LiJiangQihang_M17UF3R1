@@ -14,5 +14,13 @@ public class AttackState : StateSO
 
     public override void OnStateUpdate(EnemyController ec)
     {
+        HealthController healthController = GameObject
+                                            .Find(ConstantValue.PlayerTag)
+                                            .GetComponent<HealthController>();
+        if (healthController != null)
+        {
+            healthController.TakeDamage(0.5f); // Deal 10 damage to player
+            Debug.Log("Player Hit!");
+        }
     }
 }

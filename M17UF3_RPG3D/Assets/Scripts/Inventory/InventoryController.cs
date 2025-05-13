@@ -144,7 +144,7 @@ public class InventoryController : MonoBehaviour
     }
 
 
-    private GameObject GetPrefabByName(string name)
+    public GameObject GetPrefabByName(string name)
     {
         foreach (GameObject item in AllItems)
         {
