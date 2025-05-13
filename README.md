@@ -1,6 +1,6 @@
 # LiJiangQihang_M17UF3R1
 
-## COONTROLES:
+## CONTROLES:
 - Movimiento: W / A / S / D
 - Correr: Shift izquierdo
 - Agachar: Ctrl izquierdo
