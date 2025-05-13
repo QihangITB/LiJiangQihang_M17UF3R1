@@ -16,20 +16,22 @@ public class InventoryController : MonoBehaviour
 
     private Dictionary<string, bool> _myItems = new Dictionary<string, bool>();
 
+    public Dictionary<string, bool> MyItems { get { return _myItems; } }
+
     private void Awake()
     {
         if (Instance == null)
         {
-            Instance = this;
+            Instance = this; 
             InitializeEmptyInventory();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(ConstantValue.ItemTag) && !IsInTheInventory(other.gameObject))
+        if (other.CompareTag(ConstantValue.ItemTag) && !IsInTheInventory(other.gameObject.name))
         {
-            AddItem(other.gameObject);
+            AddItem(other.gameObject.name);
             Destroy(other.gameObject);
         }
     }
@@ -49,50 +51,49 @@ public class InventoryController : MonoBehaviour
 
     public void DeleteEquippedItem(string itemName)
     {
-        GameObject item = GetPrefabByName(itemName);
-        if (IsInTheInventory(item))
+        if (IsInTheInventory(itemName))
         {
-            RemoveItem(item);
+            RemoveItem(itemName);
             RemoveItemInstance();
         }
     }
 
-    private bool IsInTheInventory(GameObject item)
+    private bool IsInTheInventory(string itemName)
     {
-        if (_myItems.ContainsKey(item.name))
+        if (_myItems.ContainsKey(itemName))
         {
-            return _myItems[item.name];
+            return _myItems[itemName];
         }
         else
         {
-            Debug.Log($"Item '{item.name}' not exists.");
+            Debug.Log($"Item '{itemName}' not exists.");
             return false;
         }
     }
 
-    private void AddItem(GameObject item)
+    public void AddItem(string itemName)
     {
-        _myItems[item.name] = true;
+        _myItems[itemName] = true;
 
         // Activar UI
-        int index = GetItemIndex(item);
+        int index = GetItemIndexByName(itemName);
         ItemCanvas[index].SetActive(true);
     }
 
-    private void RemoveItem(GameObject item)
+    public void RemoveItem(string itemName)
     {
-        _myItems[item.name] = false;
+        _myItems[itemName] = false;
 
         // Desactivar UI
-        int index = GetItemIndex(item);
+        int index = GetItemIndexByName(itemName);
         ItemCanvas[index].SetActive(false);
     }
 
-    private int GetItemIndex(GameObject item)
+    private int GetItemIndexByName(string itemName)
     {
         for (int i = 0; i < AllItems.Count; i++)
         {
-            if (AllItems[i].name == item.name)
+            if (AllItems[i].name == itemName)
             {
                 return i;
             }
@@ -100,13 +101,12 @@ public class InventoryController : MonoBehaviour
         return ConstantValue.NotFound;
     }
 
-
     // PREFAB
     public void CreateItemInstance(string itemName)
     {
         GameObject item = GetPrefabByName(itemName);
 
-        if (IsInTheInventory(item))
+        if (IsInTheInventory(itemName))
         {
             GameObject itemInstance = Instantiate(item, RightHand);
 

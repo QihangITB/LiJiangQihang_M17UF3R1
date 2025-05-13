@@ -5,7 +5,7 @@ public class FirstPOV : MonoBehaviour
     public GameObject playerRender;
     public GameObject playerBody;
 
-    public Transform point;
+    //public Transform point;
 
     private void OnEnable()
     {
@@ -30,7 +30,7 @@ public class FirstPOV : MonoBehaviour
     {
         playerRender.transform.forward = transform.forward;
 
-        point.position = Camera.main.transform.position + Camera.main.transform.forward * 1.0f; // 1.0f es la distancia hacia adelante
-        point.forward = Camera.main.transform.forward;
+        //point.position = Camera.main.transform.position + Camera.main.transform.forward * 1.0f; // 1.0f es la distancia hacia adelante
+        //point.forward = Camera.main.transform.forward;
     }
 }

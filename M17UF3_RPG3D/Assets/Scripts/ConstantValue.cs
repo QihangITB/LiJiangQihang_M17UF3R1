@@ -43,4 +43,12 @@ public static class ConstantValue
     public const string OpenDoor = "OpenDoor";
     public const string CloseDoor = "CloseDoor";
 
+    // PLAYER
+    public const string PositionX = "PlayerPositionX";
+    public const string PositionY = "PlayerPositionY";
+    public const string PositionZ = "PlayerPositionZ";
+
+    // MESSAGES
+    public const string LoadedMsg = "Game load!";
+    public const string SavedMsg = "Game saved!";
 }

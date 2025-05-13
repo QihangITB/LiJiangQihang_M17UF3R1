@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Threading;
 using System.Collections;
+using TMPro;
 
 public class PlayerInputController : MonoBehaviour, InputControl.IPlayerActions
 {
